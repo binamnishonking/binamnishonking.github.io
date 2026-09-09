@@ -1,78 +1,716 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>BINAM NISHON — BLACK SHADOW</title>
-  <meta name="description" content="BINAM NISHON — a dark, cinematic digital identity and BLACK SHADOW project.">
-  <style>
-    :root{--bg:#050607;--panel:#0b0f10;--line:#1b2824;--text:#e8eee9;--muted:#8c9b94;--green:#59ff9a}
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at 70% 10%,#0d241b 0,transparent 28%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-    a{color:inherit;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:0 22px}
-    header{position:sticky;top:0;z-index:10;background:rgba(5,6,7,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-    nav{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:900;letter-spacing:3px}.brand span{color:var(--green)}
-    nav .links{display:flex;gap:24px;color:var(--muted);font-size:13px}.links a:hover{color:var(--green)}
-    .hero{min-height:88vh;display:grid;place-items:center;padding:80px 0;position:relative;overflow:hidden}
-    .grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(#59ff9a 1px,transparent 1px),linear-gradient(90deg,#59ff9a 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
-    .hero-inner{position:relative;text-align:center;max-width:850px}.eyebrow{color:var(--green);letter-spacing:6px;font-size:12px;font-weight:700}
-    h1{font-size:clamp(54px,12vw,128px);line-height:.9;margin:22px 0 25px;letter-spacing:-5px}
-    .hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.7}
-    .actions{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}.btn{padding:13px 20px;border:1px solid #294238;border-radius:6px;font-weight:700;font-size:13px}.btn.primary{background:var(--green);color:#06100a;border-color:var(--green)}
-    section{padding:92px 0;border-top:1px solid var(--line)}.section-title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
-    h2{font-size:34px;margin:0}.tag{color:var(--green);font-size:11px;letter-spacing:3px}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(145deg,#0c1210,#070a0a);border:1px solid var(--line);padding:26px;border-radius:10px;min-height:190px}.card b{color:var(--green);font-size:12px;letter-spacing:2px}.card h3{margin:18px 0 10px}.card p{color:var(--muted);line-height:1.7;font-size:14px}
-    .terminal{background:#030504;border:1px solid #1e3229;border-radius:10px;padding:25px;font-family:monospace;color:#9bd8b2;line-height:1.9;overflow:auto}.terminal .prompt{color:var(--green)}
-    .quote{font-size:clamp(24px,4vw,44px);line-height:1.25;max-width:850px}.quote em{color:var(--green);font-style:normal}
-    footer{padding:35px 0;color:#68756f;border-top:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;gap:20px}
-    @media(max-width:760px){nav .links{display:none}.cards{grid-template-columns:1fr}.hero{min-height:78vh}h1{letter-spacing:-3px}.section-title{display:block}.tag{display:block;margin-bottom:10px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BINAM NISHON — BLACK SHADOW</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#010402;color:#d9ffe7;font-family:Arial,Tahoma,sans-serif}
+body{overflow-x:hidden}
+
+#matrix{
+position:fixed;
+inset:0;
+z-index:0;
+opacity:.22;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+z-index:1;
+pointer-events:none;
+background:repeating-linear-gradient(
+0deg,
+transparent 0 3px,
+rgba(70,255,130,.025) 4px
+);
+}
+
+nav{
+position:relative;
+z-index:5;
+height:68px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 6%;
+border-bottom:1px solid #164d2e;
+background:rgba(0,8,4,.82);
+backdrop-filter:blur(8px);
+}
+
+.logo{
+font-weight:900;
+letter-spacing:4px;
+color:#63ff98;
+}
+
+.team{
+font-size:11px;
+letter-spacing:2px;
+color:#649777;
+}
+
+main{
+position:relative;
+z-index:2;
+max-width:1200px;
+margin:auto;
+padding:60px 6% 80px;
+}
+
+.hero{
+min-height:520px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.kicker{
+font-size:12px;
+letter-spacing:4px;
+color:#48ff89;
+}
+
+h1{
+font-size:clamp(55px,9vw,105px);
+line-height:.9;
+margin:18px 0;
+letter-spacing:7px;
+text-shadow:0 0 30px #18b85a;
+}
+
+.sub{
+font-size:17px;
+line-height:2;
+color:#8bb99a;
+max-width:600px;
+}
+
+.motto{
+margin-top:30px;
+color:#62ff99;
+font-weight:bold;
+letter-spacing:4px;
+}
+
+.radar{
+width:min(410px,80vw);
+aspect-ratio:1;
+border-radius:50%;
+border:1px solid #1c914e;
+margin:auto;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle,rgba(80,255,140,.5) 0 2px,transparent 3px),
+repeating-radial-gradient(circle,transparent 0 20%,rgba(40,255,120,.28) 20.5% 21%),
+linear-gradient(90deg,transparent 49.7%,rgba(60,255,130,.3) 50%,transparent 50.3%),
+linear-gradient(transparent 49.7%,rgba(60,255,130,.3) 50%,transparent 50.3%);
+box-shadow:0 0 60px rgba(40,255,120,.15),inset 0 0 50px rgba(40,255,120,.12);
+}
+
+.radar:before{
+content:"";
+position:absolute;
+inset:-10%;
+background:conic-gradient(
+from 0deg,
+transparent 0 72%,
+rgba(70,255,130,.55) 74%,
+transparent 77%
+);
+animation:sweep 3s linear infinite;
+}
+
+.radar:after{
+content:"";
+position:absolute;
+width:10px;
+height:10px;
+border-radius:50%;
+background:#8affae;
+box-shadow:0 0 20px #42ff83;
+top:30%;
+left:68%;
+}
+
+@keyframes sweep{
+to{transform:rotate(360deg)}
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin:30px 0;
+}
+
+.stat{
+border:1px solid #123e27;
+background:rgba(2,14,8,.78);
+padding:20px;
+}
+
+.stat b{
+display:block;
+font-size:28px;
+color:#62ff98;
+}
+
+.stat span{
+font-size:10px;
+letter-spacing:2px;
+color:#618b70;
+}
+
+.section{
+margin-top:75px;
+}
+
+.section-label{
+font-size:11px;
+letter-spacing:3px;
+color:#45ff87;
+}
+
+.section h2{
+font-size:34px;
+letter-spacing:4px;
+margin:8px 0 25px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.card{
+border:1px solid #164d2e;
+background:rgba(3,17,10,.84);
+padding:28px;
+min-height:190px;
+transition:.25s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#50ff8d;
+box-shadow:0 0 30px rgba(50,255,120,.1);
+}
+
+.card h3{
+color:#63ff98;
+letter-spacing:2px;
+margin-top:0;
+}
+
+.card p{
+color:#8fb8a0;
+line-height:1.9;
+}
+
+.terminal{
+margin-top:45px;
+border:1px solid #176138;
+background:#010604;
+}
+
+.terminal-top{
+padding:12px 18px;
+border-bottom:1px solid #123d25;
+color:#548566;
+font-size:11px;
+display:flex;
+justify-content:space-between;
+}
+
+.terminal-body{
+padding:25px;
+font:13px/2 monospace;
+color:#56e98a;
+min-height:160px;
+}
+
+button{
+margin:0 25px 25px;
+padding:12px 20px;
+border:1px solid #35d96f;
+background:#062514;
+color:#72ffa0;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#0a3d20;
+}
+
+.social-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.social{
+border:1px solid #175633;
+background:linear-gradient(135deg,rgba(4,23,13,.95),rgba(1,8,4,.95));
+padding:25px;
+min-height:130px;
+cursor:pointer;
+transition:.25s;
+}
+
+.social:hover{
+transform:translateY(-5px);
+border-color:#50ff8d;
+box-shadow:0 0 28px rgba(54,255,120,.14);
+}
+
+.social b{
+display:block;
+font-size:19px;
+color:#baffcf;
+letter-spacing:2px;
+}
+
+.social span{
+display:block;
+margin-top:12px;
+font-size:11px;
+color:#58866a;
+}
+
+.status{
+margin-top:45px;
+border:1px solid #195f37;
+padding:17px;
+display:flex;
+justify-content:space-between;
+background:rgba(0,12,6,.8);
+font-size:12px;
+}
+
+.online{
+color:#5cff92;
+}
+
+footer{
+position:relative;
+z-index:2;
+text-align:center;
+padding:30px;
+border-top:1px solid #10351f;
+color:#527764;
+letter-spacing:2px;
+}
+
+#portal{
+position:fixed;
+inset:0;
+z-index:20;
+display:none;
+align-items:center;
+justify-content:center;
+background:rgba(0,3,1,.95);
+}
+
+.portal-box{
+width:min(650px,90%);
+border:1px solid #43ff7d;
+background:rgba(1,12,6,.95);
+box-shadow:0 0 70px rgba(40,255,100,.2);
+padding:35px;
+text-align:center;
+}
+
+.portal-title{
+font:700 40px monospace;
+color:#6aff9a;
+}
+
+.portal-text{
+color:#83b695;
+line-height:1.9;
+}
+
+@media(max-width:800px){
+
+nav{
+padding:0 5%;
+}
+
+.team{
+display:none;
+}
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.radar{
+order:-1;
+}
+
+.grid,
+.social-grid{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.status{
+flex-direction:column;
+gap:10px;
+}
+
+h1{
+font-size:60px;
+}
+
+}
+</style>
 </head>
+
 <body>
-<header><div class="wrap"><nav>
-  <a class="brand" href="#top">BINAM<span>NISHON</span></a>
-  <div class="links"><a href="#identity">Identity</a><a href="#shadow">BLACK SHADOW</a><a href="#signal">Signal</a></div>
-</nav></div></header>
 
-<main id="top">
-  <section class="hero">
-    <div class="grid"></div>
-    <div class="hero-inner">
-      <div class="eyebrow">UNKNOWN // UNSEEN // UNBROKEN</div>
-      <h1>BINAM<br><span style="color:var(--green)">NISHON</span></h1>
-      <p>A cinematic digital identity built around mystery, discipline, strategy and controlled movement. This is the first public interface of the project.</p>
-      <div class="actions"><a class="btn primary" href="#identity">ENTER SYSTEM</a><a class="btn" href="#shadow">BLACK SHADOW</a></div>
-    </div>
-  </section>
+<canvas id="matrix"></canvas>
+<div class="overlay"></div>
 
-  <section id="identity"><div class="wrap">
-    <div class="section-title"><div><span class="tag">01 / IDENTITY</span><h2>The name is the signal.</h2></div></div>
-    <div class="cards">
-      <article class="card"><b>01 — PRESENCE</b><h3>Binam Nishon</h3><p>An identity designed to remain recognizable without depending on noise, exposure or unnecessary explanation.</p></article>
-      <article class="card"><b>02 — MINDSET</b><h3>Discipline over impulse</h3><p>Every move has a reason. Every public detail should reinforce the identity instead of weakening it.</p></article>
-      <article class="card"><b>03 — CODE</b><h3>Dark / precise / minimal</h3><p>A restrained visual language: black surfaces, terminal textures, radar-like grids and controlled neon signals.</p></article>
-    </div>
-  </div></section>
+<nav>
+<div class="logo">BINAM NISHON</div>
+<div class="team">BLACK SHADOW // SYSTEM ONLINE</div>
+</nav>
 
-  <section id="shadow"><div class="wrap">
-    <div class="section-title"><div><span class="tag">02 / BLACK SHADOW</span><h2>Operate from the shadows.</h2></div></div>
-    <div class="terminal">
-      <div><span class="prompt">BINAM@NISHON:~$</span> initialize BLACK_SHADOW</div>
-      <div>[ OK ] identity layer loaded</div>
-      <div>[ OK ] signal encrypted</div>
-      <div>[ OK ] visual system online</div>
-      <div>[ .. ] mission: build without unnecessary noise</div>
-      <div><span class="prompt">BLACK_SHADOW@SYSTEM:~$</span> status</div>
-      <div>STATUS: <strong>ACTIVE</strong></div>
-    </div>
-  </div></section>
+<main>
 
-  <section id="signal"><div class="wrap">
-    <div class="section-title"><div><span class="tag">03 / SIGNAL</span><h2>No empty promises.</h2></div></div>
-    <p class="quote">“A strong identity is not what it claims to be. <em>It is what remains true when the noise disappears.</em>”</p>
-  </div></section>
+<section class="hero">
+
+<div>
+<div class="kicker">IDENTITY // CLASSIFIED</div>
+
+<h1>بی‌نام<br>نشان</h1>
+
+<p class="sub">
+یک هویت ناشناس با ذهنی دقیق؛
+جایی میان سکوت، استراتژی و خلاقیت.
+این صفحه هسته دیجیتال پروژه BINAM NISHON است.
+</p>
+
+<div class="motto">
+SILENT. PRECISE. CREATIVE.
+</div>
+</div>
+
+<div>
+<div class="radar"></div>
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat">
+<b>01</b>
+<span>IDENTITY</span>
+</div>
+
+<div class="stat">
+<b>02</b>
+<span>BLACK SHADOW</span>
+</div>
+
+<div class="stat">
+<b>03</b>
+<span>RADAR ACTIVE</span>
+</div>
+
+<div class="stat">
+<b>∞</b>
+<span>NO TRACE</span>
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="section-label">// BLACK SHADOW</div>
+<h2>PROJECT CORE</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>BINAM NISHON</h3>
+<p>
+پروفایل اصلی پروژه؛ هویت، مسیر،
+اصول و روایت شخصیتی در یک محیط
+دیجیتال مرموز و متمرکز.
+</p>
+</div>
+
+<div class="card">
+<h3>BLACK SHADOW</h3>
+<p>
+تیم پروژه با کد داخلی:
+LOYAL. UNBREAKABLE.
+وفاداری، همکاری و اجرای دقیق
+در مرکز این تیم قرار دارد.
+</p>
+</div>
+
+<div class="card">
+<h3>THE CODE</h3>
+<p>
+SILENT برای تمرکز،
+PRECISE برای نتیجه،
+و CREATIVE برای ساخت چیزی
+متفاوت از دیگران.
+</p>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+
+<div class="section-label">// SECURE INTELLIGENCE</div>
+<h2>PROJECT DOSSIER</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>CODENAME</h3>
+<p>
+BINAM NISHON
+<br><br>
+هویتی که بیشتر از آن‌که دیده شود،
+اثر آن دیده می‌شود.
+</p>
+</div>
+
+<div class="card">
+<h3>TEAM CODE</h3>
+<p>
+LOYAL. UNBREAKABLE.
+<br><br>
+وفاداری، انضباط و اجرای دقیق.
+</p>
+</div>
+
+<div class="card">
+<h3>CORE</h3>
+<p>
+SILENT / PRECISE / CREATIVE
+<br><br>
+سه اصل اصلی پروژه.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="terminal">
+
+<div class="terminal-top">
+<span>● ● ●</span>
+<b>BLACK_SHADOW://CORE</b>
+</div>
+
+<div class="terminal-body" id="terminal">
+BOOT SEQUENCE...<br>
+RADAR LINK ........ ONLINE<br>
+IDENTITY CORE ..... VERIFIED<br>
+SHADOW PROTOCOL ... ACTIVE<br>
+THREAT LEVEL ...... NOMINAL<br>
+READY_
+</div>
+
+<button onclick="scan()">RUN SYSTEM SCAN</button>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="section-label">// NETWORK ACCESS</div>
+<h2>SOCIAL GRID</h2>
+
+<div class="social-grid">
+
+<div class="social" onclick="portal('FACEBOOK')">
+<b>FACEBOOK</b>
+<span>NETWORK // 01</span>
+</div>
+
+<div class="social" onclick="portal('INSTAGRAM')">
+<b>INSTAGRAM</b>
+<span>NETWORK // 02</span>
+</div>
+
+<div class="social" onclick="portal('TELEGRAM')">
+<b>TELEGRAM</b>
+<span>NETWORK // 03</span>
+</div>
+
+<div class="social" onclick="portal('IMO')">
+<b>IMO</b>
+<span>NETWORK // 04</span>
+</div>
+
+<div class="social" onclick="portal('TIKTOK')">
+<b>TIKTOK</b>
+<span>NETWORK // 05</span>
+</div>
+
+<div class="social" onclick="portal('PUBG')">
+<b>PUBG</b>
+<span>NETWORK // 06</span>
+</div>
+
+</div>
+
+</section>
+
+<div class="status">
+<span>SYSTEM: <b class="online">ONLINE</b></span>
+<span>MODE: BLACK SHADOW</span>
+<span>ACCESS: BINAM NISHON</span>
+</div>
+
 </main>
 
-<footer><div class="wrap" style="width:100%;display:flex;justify-content:space-between"><span>© BINAM NISHON</span><span>BLACK SHADOW / SYSTEM 01</span></div></footer>
+<footer>
+BLACK SHADOW © BINAM NISHON — SILENT. PRECISE. CREATIVE.
+</footer>
+
+<div id="portal">
+
+<div class="portal-box">
+
+<div class="portal-title" id="portalTitle">
+NETWORK
+</div>
+
+<p class="portal-text" id="portalText">
+SECURE CHANNEL INITIALIZING...
+</p>
+
+<button onclick="closePortal()">
+CLOSE CHANNEL
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+
+let width,height,columns,drops;
+
+const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ";
+
+function resize(){
+
+width=canvas.width=window.innerWidth;
+height=canvas.height=window.innerHeight;
+
+columns=Math.floor(width/18);
+drops=Array(columns).fill(0);
+
+}
+
+resize();
+
+window.addEventListener("resize",resize);
+
+function matrix(){
+
+ctx.fillStyle="rgba(0,3,1,.08)";
+ctx.fillRect(0,0,width,height);
+
+ctx.font="15px monospace";
+ctx.fillStyle="#27ff6b";
+
+for(let i=0;i<columns;i++){
+
+let char=chars[Math.floor(Math.random()*chars.length)];
+
+ctx.fillText(char,i*18,drops[i]*18);
+
+if(drops[i]*18>height && Math.random()>.975){
+drops[i]=0;
+}
+
+drops[i]++;
+
+}
+
+requestAnimationFrame(matrix);
+
+}
+
+matrix();
+
+function scan(){
+
+const output=document.getElementById("terminal");
+
+const lines=[
+"SCAN STARTED...",
+"RADAR SWEEP ........ 100%",
+"SIGNAL INTEGRITY ... STABLE",
+"IDENTITY CORE ...... LOCKED",
+"BLACK SHADOW ...... PRESENT",
+"THREAT LEVEL ....... NOMINAL",
+"SCAN COMPLETE."
+];
+
+output.innerHTML="";
+
+lines.forEach((line,index)=>{
+
+setTimeout(()=>{
+
+output.innerHTML+=line+"<br>";
+
+},index*300);
+
+});
+
+}
+
+function portal(name){
+
+document.getElementById("portal").style.display="flex";
+
+document.getElementById("portalTitle").textContent=name;
+
+document.getElementById("portalText").textContent=
+"MATRIX CHANNEL // "+name+" — SECURE INTERFACE READY";
+
+}
+
+function closePortal(){
+
+document.getElementById("portal").style.display="none";
+
+}
+
+</script>
+
 </body>
 </html>
