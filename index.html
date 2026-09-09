@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BINAM NISHON — BLACK SHADOW</title>
+  <meta name="description" content="BINAM NISHON — a dark, cinematic digital identity and BLACK SHADOW project.">
+  <style>
+    :root{--bg:#050607;--panel:#0b0f10;--line:#1b2824;--text:#e8eee9;--muted:#8c9b94;--green:#59ff9a}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 70% 10%,#0d241b 0,transparent 28%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+    a{color:inherit;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:0 22px}
+    header{position:sticky;top:0;z-index:10;background:rgba(5,6,7,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:900;letter-spacing:3px}.brand span{color:var(--green)}
+    nav .links{display:flex;gap:24px;color:var(--muted);font-size:13px}.links a:hover{color:var(--green)}
+    .hero{min-height:88vh;display:grid;place-items:center;padding:80px 0;position:relative;overflow:hidden}
+    .grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(#59ff9a 1px,transparent 1px),linear-gradient(90deg,#59ff9a 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+    .hero-inner{position:relative;text-align:center;max-width:850px}.eyebrow{color:var(--green);letter-spacing:6px;font-size:12px;font-weight:700}
+    h1{font-size:clamp(54px,12vw,128px);line-height:.9;margin:22px 0 25px;letter-spacing:-5px}
+    .hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.7}
+    .actions{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}.btn{padding:13px 20px;border:1px solid #294238;border-radius:6px;font-weight:700;font-size:13px}.btn.primary{background:var(--green);color:#06100a;border-color:var(--green)}
+    section{padding:92px 0;border-top:1px solid var(--line)}.section-title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
+    h2{font-size:34px;margin:0}.tag{color:var(--green);font-size:11px;letter-spacing:3px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(145deg,#0c1210,#070a0a);border:1px solid var(--line);padding:26px;border-radius:10px;min-height:190px}.card b{color:var(--green);font-size:12px;letter-spacing:2px}.card h3{margin:18px 0 10px}.card p{color:var(--muted);line-height:1.7;font-size:14px}
+    .terminal{background:#030504;border:1px solid #1e3229;border-radius:10px;padding:25px;font-family:monospace;color:#9bd8b2;line-height:1.9;overflow:auto}.terminal .prompt{color:var(--green)}
+    .quote{font-size:clamp(24px,4vw,44px);line-height:1.25;max-width:850px}.quote em{color:var(--green);font-style:normal}
+    footer{padding:35px 0;color:#68756f;border-top:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;gap:20px}
+    @media(max-width:760px){nav .links{display:none}.cards{grid-template-columns:1fr}.hero{min-height:78vh}h1{letter-spacing:-3px}.section-title{display:block}.tag{display:block;margin-bottom:10px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+  <a class="brand" href="#top">BINAM<span>NISHON</span></a>
+  <div class="links"><a href="#identity">Identity</a><a href="#shadow">BLACK SHADOW</a><a href="#signal">Signal</a></div>
+</nav></div></header>
+
+<main id="top">
+  <section class="hero">
+    <div class="grid"></div>
+    <div class="hero-inner">
+      <div class="eyebrow">UNKNOWN // UNSEEN // UNBROKEN</div>
+      <h1>BINAM<br><span style="color:var(--green)">NISHON</span></h1>
+      <p>A cinematic digital identity built around mystery, discipline, strategy and controlled movement. This is the first public interface of the project.</p>
+      <div class="actions"><a class="btn primary" href="#identity">ENTER SYSTEM</a><a class="btn" href="#shadow">BLACK SHADOW</a></div>
+    </div>
+  </section>
+
+  <section id="identity"><div class="wrap">
+    <div class="section-title"><div><span class="tag">01 / IDENTITY</span><h2>The name is the signal.</h2></div></div>
+    <div class="cards">
+      <article class="card"><b>01 — PRESENCE</b><h3>Binam Nishon</h3><p>An identity designed to remain recognizable without depending on noise, exposure or unnecessary explanation.</p></article>
+      <article class="card"><b>02 — MINDSET</b><h3>Discipline over impulse</h3><p>Every move has a reason. Every public detail should reinforce the identity instead of weakening it.</p></article>
+      <article class="card"><b>03 — CODE</b><h3>Dark / precise / minimal</h3><p>A restrained visual language: black surfaces, terminal textures, radar-like grids and controlled neon signals.</p></article>
+    </div>
+  </div></section>
+
+  <section id="shadow"><div class="wrap">
+    <div class="section-title"><div><span class="tag">02 / BLACK SHADOW</span><h2>Operate from the shadows.</h2></div></div>
+    <div class="terminal">
+      <div><span class="prompt">BINAM@NISHON:~$</span> initialize BLACK_SHADOW</div>
+      <div>[ OK ] identity layer loaded</div>
+      <div>[ OK ] signal encrypted</div>
+      <div>[ OK ] visual system online</div>
+      <div>[ .. ] mission: build without unnecessary noise</div>
+      <div><span class="prompt">BLACK_SHADOW@SYSTEM:~$</span> status</div>
+      <div>STATUS: <strong>ACTIVE</strong></div>
+    </div>
+  </div></section>
+
+  <section id="signal"><div class="wrap">
+    <div class="section-title"><div><span class="tag">03 / SIGNAL</span><h2>No empty promises.</h2></div></div>
+    <p class="quote">“A strong identity is not what it claims to be. <em>It is what remains true when the noise disappears.</em>”</p>
+  </div></section>
+</main>
+
+<footer><div class="wrap" style="width:100%;display:flex;justify-content:space-between"><span>© BINAM NISHON</span><span>BLACK SHADOW / SYSTEM 01</span></div></footer>
+</body>
+</html>
