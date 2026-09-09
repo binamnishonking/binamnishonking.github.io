@@ -7,88 +7,243 @@
 
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#010402;color:#d9ffe7;font-family:Arial,Tahoma,sans-serif}
+
+:root{
+--g:#4dff88;
+--g2:#18d95d;
+--dim:#5c8f6d;
+--bg:#010503;
+}
+
+html,body{
+margin:0;
+padding:0;
+background:var(--bg);
+color:#d9ffe5;
+font-family:Arial,Tahoma,sans-serif
+}
+
 body{overflow-x:hidden}
 
 #matrix{
 position:fixed;
 inset:0;
 z-index:0;
-opacity:.22;
+opacity:.48
 }
 
-.overlay{
+.noise{
 position:fixed;
 inset:0;
 z-index:1;
 pointer-events:none;
+opacity:.12;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")
+}
+
+.scanlines{
+position:fixed;
+inset:0;
+z-index:2;
+pointer-events:none;
 background:repeating-linear-gradient(
 0deg,
 transparent 0 3px,
-rgba(70,255,130,.025) 4px
-);
+rgba(83,255,135,.035) 4px
+)
+}
+
+.vignette{
+position:fixed;
+inset:0;
+z-index:3;
+pointer-events:none;
+background:radial-gradient(
+circle,
+transparent 35%,
+rgba(0,0,0,.72) 100%
+)
+}
+
+#welcome{
+position:fixed;
+inset:0;
+z-index:50;
+background:#010503;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden
+}
+
+.welcome-grid{
+position:absolute;
+inset:0;
+background:
+linear-gradient(rgba(50,255,120,.07) 1px,transparent 1px),
+linear-gradient(90deg,rgba(50,255,120,.07) 1px,transparent 1px);
+background-size:45px 45px;
+transform:
+perspective(500px)
+rotateX(55deg)
+scale(1.6);
+transform-origin:center bottom;
+opacity:.45
+}
+
+.wbox{
+position:relative;
+width:min(850px,90%);
+padding:55px 25px;
+border:1px solid #1e9e51;
+background:rgba(0,12,6,.78);
+box-shadow:
+0 0 80px rgba(35,255,100,.16),
+inset 0 0 45px rgba(35,255,100,.05)
+}
+
+.wline{
+font:11px monospace;
+color:#4cff87;
+letter-spacing:5px
+}
+
+.wtitle{
+font-size:clamp(48px,10vw,105px);
+font-weight:900;
+letter-spacing:8px;
+color:#7affaa;
+text-shadow:
+0 0 12px #28ff70,
+0 0 45px rgba(40,255,110,.5);
+margin:25px 0
+}
+
+.wsub{
+font:14px monospace;
+color:#78a889;
+letter-spacing:3px
+}
+
+.enter{
+margin:35px 0 0;
+padding:15px 38px;
+background:#031c0d;
+border:1px solid #4cff87;
+color:#7dffaa;
+font-weight:900;
+letter-spacing:4px;
+cursor:pointer;
+box-shadow:0 0 22px rgba(55,255,120,.15);
+transition:.25s
+}
+
+.enter:hover{
+background:#083d1b;
+box-shadow:0 0 35px rgba(55,255,120,.35);
+transform:scale(1.03)
+}
+
+.corner{
+position:absolute;
+width:24px;
+height:24px;
+border-color:#4cff87
+}
+
+.c1{
+top:12px;
+left:12px;
+border-top:1px solid;
+border-left:1px solid
+}
+
+.c2{
+top:12px;
+right:12px;
+border-top:1px solid;
+border-right:1px solid
+}
+
+.c3{
+bottom:12px;
+left:12px;
+border-bottom:1px solid;
+border-left:1px solid
+}
+
+.c4{
+bottom:12px;
+right:12px;
+border-bottom:1px solid;
+border-right:1px solid
 }
 
 nav{
 position:relative;
-z-index:5;
+z-index:8;
 height:68px;
 display:flex;
 align-items:center;
 justify-content:space-between;
 padding:0 6%;
 border-bottom:1px solid #164d2e;
-background:rgba(0,8,4,.82);
-backdrop-filter:blur(8px);
+background:rgba(0,8,4,.84);
+backdrop-filter:blur(10px);
+box-shadow:0 0 25px rgba(40,255,110,.05)
 }
 
 .logo{
 font-weight:900;
 letter-spacing:4px;
 color:#63ff98;
+text-shadow:0 0 12px #27ff70
 }
 
 .team{
 font-size:11px;
 letter-spacing:2px;
-color:#649777;
+color:#649777
 }
 
 main{
 position:relative;
-z-index:2;
-max-width:1200px;
+z-index:5;
+max-width:1250px;
 margin:auto;
-padding:60px 6% 80px;
+padding:55px 6% 90px
 }
 
 .hero{
-min-height:520px;
+min-height:570px;
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:50px;
-align-items:center;
+grid-template-columns:1.05fr .95fr;
+gap:40px;
+align-items:center
 }
 
 .kicker{
 font-size:12px;
-letter-spacing:4px;
-color:#48ff89;
+letter-spacing:5px;
+color:#48ff89
 }
 
 h1{
-font-size:clamp(55px,9vw,105px);
-line-height:.9;
+font-size:clamp(55px,9vw,108px);
+line-height:.88;
 margin:18px 0;
 letter-spacing:7px;
-text-shadow:0 0 30px #18b85a;
+text-shadow:
+0 0 15px #18b85a,
+0 0 45px rgba(24,184,90,.35)
 }
 
 .sub{
 font-size:17px;
 line-height:2;
 color:#8bb99a;
-max-width:600px;
+max-width:650px
 }
 
 .motto{
@@ -96,129 +251,204 @@ margin-top:30px;
 color:#62ff99;
 font-weight:bold;
 letter-spacing:4px;
+text-shadow:0 0 10px rgba(80,255,140,.45)
 }
 
 .radar{
-width:min(410px,80vw);
+width:min(450px,82vw);
 aspect-ratio:1;
 border-radius:50%;
-border:1px solid #1c914e;
+border:1px solid #28d968;
 margin:auto;
 position:relative;
 overflow:hidden;
+
 background:
-radial-gradient(circle,rgba(80,255,140,.5) 0 2px,transparent 3px),
-repeating-radial-gradient(circle,transparent 0 20%,rgba(40,255,120,.28) 20.5% 21%),
-linear-gradient(90deg,transparent 49.7%,rgba(60,255,130,.3) 50%,transparent 50.3%),
-linear-gradient(transparent 49.7%,rgba(60,255,130,.3) 50%,transparent 50.3%);
-box-shadow:0 0 60px rgba(40,255,120,.15),inset 0 0 50px rgba(40,255,120,.12);
+radial-gradient(
+circle,
+rgba(85,255,145,.75) 0 2px,
+transparent 3px
+),
+repeating-radial-gradient(
+circle,
+transparent 0 19.5%,
+rgba(40,255,120,.35) 20% 20.4%
+),
+linear-gradient(
+90deg,
+transparent 49.5%,
+rgba(60,255,130,.35) 50%,
+transparent 50.5%
+),
+linear-gradient(
+transparent 49.5%,
+rgba(60,255,130,.35) 50%,
+transparent 50.5%
+);
+
+box-shadow:
+0 0 45px rgba(40,255,120,.2),
+0 0 100px rgba(40,255,120,.08),
+inset 0 0 65px rgba(40,255,120,.18)
 }
 
 .radar:before{
 content:"";
 position:absolute;
-inset:-10%;
-background:conic-gradient(
+inset:-15%;
+background:
+conic-gradient(
 from 0deg,
 transparent 0 72%,
-rgba(70,255,130,.55) 74%,
-transparent 77%
+rgba(70,255,130,.05) 72%,
+rgba(70,255,130,.7) 74%,
+transparent 78%
 );
-animation:sweep 3s linear infinite;
+animation:sweep 2.7s linear infinite
 }
 
 .radar:after{
 content:"";
 position:absolute;
-width:10px;
-height:10px;
+width:11px;
+height:11px;
 border-radius:50%;
-background:#8affae;
-box-shadow:0 0 20px #42ff83;
+background:#9affba;
+box-shadow:
+0 0 8px #42ff83,
+0 0 25px #42ff83,
+0 0 55px #42ff83;
 top:30%;
 left:68%;
+animation:pulse 1.4s infinite
+}
+
+.radar .ring{
+position:absolute;
+border:1px solid rgba(75,255,135,.25);
+border-radius:50%;
+inset:10%
+}
+
+.radar .ring2{
+inset:30%
+}
+
+.radar .ring3{
+inset:50%
 }
 
 @keyframes sweep{
 to{transform:rotate(360deg)}
 }
 
+@keyframes pulse{
+50%{
+transform:scale(1.8);
+opacity:.55
+}
+}
+
 .stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:12px;
-margin:30px 0;
+margin:20px 0 35px
+}
+
+.stat,.card,.social{
+border:1px solid #123e27;
+background:
+linear-gradient(
+145deg,
+rgba(3,20,10,.88),
+rgba(1,8,4,.9)
+);
+position:relative;
+overflow:hidden
 }
 
 .stat{
-border:1px solid #123e27;
-background:rgba(2,14,8,.78);
-padding:20px;
+padding:20px
+}
+
+.stat:before,
+.card:before,
+.social:before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:35px;
+height:1px;
+background:#55ff8e;
+box-shadow:0 0 12px #55ff8e
 }
 
 .stat b{
 display:block;
 font-size:28px;
 color:#62ff98;
+text-shadow:0 0 12px rgba(50,255,110,.35)
 }
 
 .stat span{
 font-size:10px;
 letter-spacing:2px;
-color:#618b70;
+color:#618b70
 }
 
 .section{
-margin-top:75px;
+margin-top:75px
 }
 
 .section-label{
 font-size:11px;
 letter-spacing:3px;
-color:#45ff87;
+color:#45ff87
 }
 
 .section h2{
 font-size:34px;
 letter-spacing:4px;
 margin:8px 0 25px;
+text-shadow:0 0 15px rgba(45,255,110,.2)
 }
 
-.grid{
+.grid,.social-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:18px;
+gap:18px
 }
 
 .card{
-border:1px solid #164d2e;
-background:rgba(3,17,10,.84);
 padding:28px;
 min-height:190px;
-transition:.25s;
+transition:.25s
 }
 
-.card:hover{
-transform:translateY(-5px);
+.card:hover,.social:hover{
+transform:translateY(-6px);
 border-color:#50ff8d;
-box-shadow:0 0 30px rgba(50,255,120,.1);
+box-shadow:
+0 0 35px rgba(50,255,120,.12),
+inset 0 0 25px rgba(50,255,120,.04)
 }
 
 .card h3{
 color:#63ff98;
 letter-spacing:2px;
-margin-top:0;
+margin-top:0
 }
 
 .card p{
 color:#8fb8a0;
-line-height:1.9;
-}
-
-.terminal{
+line-height:1.9
+}.terminal{
 margin-top:45px;
 border:1px solid #176138;
 background:#010604;
+box-shadow:0 0 35px rgba(40,255,100,.06)
 }
 
 .terminal-top{
@@ -227,7 +457,7 @@ border-bottom:1px solid #123d25;
 color:#548566;
 font-size:11px;
 display:flex;
-justify-content:space-between;
+justify-content:space-between
 }
 
 .terminal-body{
@@ -235,6 +465,7 @@ padding:25px;
 font:13px/2 monospace;
 color:#56e98a;
 min-height:160px;
+text-shadow:0 0 8px rgba(70,255,130,.35)
 }
 
 button{
@@ -245,45 +476,33 @@ background:#062514;
 color:#72ffa0;
 cursor:pointer;
 font-weight:bold;
+letter-spacing:1px
 }
 
 button:hover{
 background:#0a3d20;
-}
-
-.social-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
+box-shadow:0 0 18px rgba(50,255,120,.2)
 }
 
 .social{
-border:1px solid #175633;
-background:linear-gradient(135deg,rgba(4,23,13,.95),rgba(1,8,4,.95));
 padding:25px;
 min-height:130px;
 cursor:pointer;
-transition:.25s;
-}
-
-.social:hover{
-transform:translateY(-5px);
-border-color:#50ff8d;
-box-shadow:0 0 28px rgba(54,255,120,.14);
+transition:.25s
 }
 
 .social b{
 display:block;
 font-size:19px;
 color:#baffcf;
-letter-spacing:2px;
+letter-spacing:2px
 }
 
 .social span{
 display:block;
 margin-top:12px;
 font-size:11px;
-color:#58866a;
+color:#58866a
 }
 
 .status{
@@ -294,20 +513,22 @@ display:flex;
 justify-content:space-between;
 background:rgba(0,12,6,.8);
 font-size:12px;
+box-shadow:0 0 25px rgba(40,255,100,.05)
 }
 
 .online{
 color:#5cff92;
+text-shadow:0 0 8px #3cff78
 }
 
 footer{
 position:relative;
-z-index:2;
+z-index:5;
 text-align:center;
 padding:30px;
 border-top:1px solid #10351f;
 color:#527764;
-letter-spacing:2px;
+letter-spacing:2px
 }
 
 #portal{
@@ -317,62 +538,62 @@ z-index:20;
 display:none;
 align-items:center;
 justify-content:center;
-background:rgba(0,3,1,.95);
+background:rgba(0,3,1,.96)
 }
 
 .portal-box{
 width:min(650px,90%);
 border:1px solid #43ff7d;
-background:rgba(1,12,6,.95);
-box-shadow:0 0 70px rgba(40,255,100,.2);
+background:rgba(1,12,6,.97);
+box-shadow:0 0 70px rgba(40,255,100,.25);
 padding:35px;
-text-align:center;
+text-align:center
 }
 
 .portal-title{
 font:700 40px monospace;
 color:#6aff9a;
+text-shadow:0 0 15px #3cff78
 }
 
 .portal-text{
 color:#83b695;
-line-height:1.9;
+line-height:1.9
 }
 
 @media(max-width:800px){
 
 nav{
-padding:0 5%;
+padding:0 5%
 }
 
 .team{
-display:none;
+display:none
 }
 
 .hero{
-grid-template-columns:1fr;
+grid-template-columns:1fr
 }
 
 .radar{
-order:-1;
+order:-1
 }
 
-.grid,
-.social-grid{
-grid-template-columns:1fr;
+.grid,.social-grid{
+grid-template-columns:1fr
 }
 
 .stats{
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,1fr)
 }
 
 .status{
 flex-direction:column;
-gap:10px;
+gap:10px
 }
 
 h1{
-font-size:60px;
+font-size:60px
 }
 
 }
@@ -381,12 +602,53 @@ font-size:60px;
 
 <body>
 
+<div id="welcome">
+
+<div class="welcome-grid"></div>
+
+<div class="wbox">
+
+<i class="corner c1"></i>
+<i class="corner c2"></i>
+<i class="corner c3"></i>
+<i class="corner c4"></i>
+
+<div class="wline">
+BLACK SHADOW // SECURE GATEWAY
+</div>
+
+<div class="wtitle">
+BINAM NISHON
+</div>
+
+<div class="wsub">
+IDENTITY CLASSIFIED // SYSTEM READY
+</div>
+
+<button class="enter" onclick="enterSystem()">
+ENTER SYSTEM
+</button>
+
+</div>
+
+</div>
+
 <canvas id="matrix"></canvas>
-<div class="overlay"></div>
+
+<div class="noise"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
 
 <nav>
-<div class="logo">BINAM NISHON</div>
-<div class="team">BLACK SHADOW // SYSTEM ONLINE</div>
+
+<div class="logo">
+BINAM NISHON
+</div>
+
+<div class="team">
+BLACK SHADOW // SYSTEM ONLINE
+</div>
+
 </nav>
 
 <main>
@@ -394,9 +656,14 @@ font-size:60px;
 <section class="hero">
 
 <div>
-<div class="kicker">IDENTITY // CLASSIFIED</div>
 
-<h1>بی‌نام<br>نشان</h1>
+<div class="kicker">
+IDENTITY // CLASSIFIED
+</div>
+
+<h1>
+بی‌نام<br>نشان
+</h1>
 
 <p class="sub">
 یک هویت ناشناس با ذهنی دقیق؛
@@ -407,10 +674,19 @@ font-size:60px;
 <div class="motto">
 SILENT. PRECISE. CREATIVE.
 </div>
+
 </div>
 
 <div>
-<div class="radar"></div>
+
+<div class="radar">
+
+<div class="ring"></div>
+<div class="ring ring2"></div>
+<div class="ring ring3"></div>
+
+</div>
+
 </div>
 
 </section>
@@ -441,76 +717,117 @@ SILENT. PRECISE. CREATIVE.
 
 <section class="section">
 
-<div class="section-label">// BLACK SHADOW</div>
-<h2>PROJECT CORE</h2>
+<div class="section-label">
+// BLACK SHADOW
+</div>
+
+<h2>
+PROJECT CORE
+</h2>
 
 <div class="grid">
 
 <div class="card">
-<h3>BINAM NISHON</h3>
+
+<h3>
+BINAM NISHON
+</h3>
+
 <p>
 پروفایل اصلی پروژه؛ هویت، مسیر،
 اصول و روایت شخصیتی در یک محیط
 دیجیتال مرموز و متمرکز.
 </p>
+
 </div>
 
 <div class="card">
-<h3>BLACK SHADOW</h3>
+
+<h3>
+BLACK SHADOW
+</h3>
+
 <p>
 تیم پروژه با کد داخلی:
 LOYAL. UNBREAKABLE.
 وفاداری، همکاری و اجرای دقیق
 در مرکز این تیم قرار دارد.
 </p>
+
 </div>
 
 <div class="card">
-<h3>THE CODE</h3>
+
+<h3>
+THE CODE
+</h3>
+
 <p>
 SILENT برای تمرکز،
 PRECISE برای نتیجه،
 و CREATIVE برای ساخت چیزی
 متفاوت از دیگران.
 </p>
+
 </div>
 
 </div>
+
 </section>
 
 <section class="section">
 
-<div class="section-label">// SECURE INTELLIGENCE</div>
-<h2>PROJECT DOSSIER</h2>
+<div class="section-label">
+// SECURE INTELLIGENCE
+</div>
+
+<h2>
+PROJECT DOSSIER
+</h2>
 
 <div class="grid">
 
 <div class="card">
-<h3>CODENAME</h3>
+
+<h3>
+CODENAME
+</h3>
+
 <p>
 BINAM NISHON
 <br><br>
 هویتی که بیشتر از آن‌که دیده شود،
 اثر آن دیده می‌شود.
 </p>
+
 </div>
 
 <div class="card">
-<h3>TEAM CODE</h3>
+
+<h3>
+TEAM CODE
+</h3>
+
 <p>
 LOYAL. UNBREAKABLE.
 <br><br>
 وفاداری، انضباط و اجرای دقیق.
 </p>
+
 </div>
 
 <div class="card">
-<h3>CORE</h3>
+
+<h3>
+CORE
+</h3>
+
 <p>
 SILENT / PRECISE / CREATIVE
 <br><br>
 سه اصل اصلی پروژه.
 </p>
+
 </div>
 
 </div>
@@ -522,193 +839,347 @@ SILENT / PRECISE / CREATIVE
 <div class="terminal">
 
 <div class="terminal-top">
-<span>● ● ●</span>
-<b>BLACK_SHADOW://CORE</b>
+
+<span>
+● ● ●
+</span>
+
+<b>
+BLACK_SHADOW://CORE
+</b>
+
 </div>
 
 <div class="terminal-body" id="terminal">
+
 BOOT SEQUENCE...<br>
 RADAR LINK ........ ONLINE<br>
 IDENTITY CORE ..... VERIFIED<br>
 SHADOW PROTOCOL ... ACTIVE<br>
 THREAT LEVEL ...... NOMINAL<br>
 READY_
-</div>
-
-<button onclick="scan()">RUN SYSTEM SCAN</button>
 
 </div>
 
-</section>
-
-<section class="section">
-
-<div class="section-label">// NETWORK ACCESS</div>
-<h2>SOCIAL GRID</h2>
-
-<div class="social-grid">
-
-<div class="social" onclick="portal('FACEBOOK')">
-<b>FACEBOOK</b>
-<span>NETWORK // 01</span>
-</div>
-
-<div class="social" onclick="portal('INSTAGRAM')">
-<b>INSTAGRAM</b>
-<span>NETWORK // 02</span>
-</div>
-
-<div class="social" onclick="portal('TELEGRAM')">
-<b>TELEGRAM</b>
-<span>NETWORK // 03</span>
-</div>
-
-<div class="social" onclick="portal('IMO')">
-<b>IMO</b>
-<span>NETWORK // 04</span>
-</div>
-
-<div class="social" onclick="portal('TIKTOK')">
-<b>TIKTOK</b>
-<span>NETWORK // 05</span>
-</div>
-
-<div class="social" onclick="portal('PUBG')">
-<b>PUBG</b>
-<span>NETWORK // 06</span>
-</div>
-
-</div>
-
-</section>
-
-<div class="status">
-<span>SYSTEM: <b class="online">ONLINE</b></span>
-<span>MODE: BLACK SHADOW</span>
-<span>ACCESS: BINAM NISHON</span>
-</div>
-
-</main>
-
-<footer>
-BLACK SHADOW © BINAM NISHON — SILENT. PRECISE. CREATIVE.
-</footer>
-
-<div id="portal">
-
-<div class="portal-box">
-
-<div class="portal-title" id="portalTitle">
-NETWORK
-</div>
-
-<p class="portal-text" id="portalText">
-SECURE CHANNEL INITIALIZING...
-</p>
-
-<button onclick="closePortal()">
-CLOSE CHANNEL
+<button onclick="scan()">
+RUN SYSTEM SCAN
 </button>
 
 </div>
 
+</section><!-- SOCIAL CHANNELS -->
+<section class="section" id="channels">
+  <div class="section-head">
+    <span>06 // SECURE CHANNELS</span>
+    <b>BLACK SHADOW NETWORK</b>
+  </div>
+
+  <div class="social-grid">
+
+    <div class="social-card" onclick="portal('FACEBOOK')">
+      <div class="social-icon">F</div>
+      <div>
+        <h3>FACEBOOK</h3>
+        <p>CLASSIFIED SOCIAL CHANNEL</p>
+      </div>
+      <span class="open">OPEN //</span>
+    </div>
+
+    <div class="social-card" onclick="portal('INSTAGRAM')">
+      <div class="social-icon">◎</div>
+      <div>
+        <h3>INSTAGRAM</h3>
+        <p>VISUAL INTELLIGENCE CHANNEL</p>
+      </div>
+      <span class="open">OPEN //</span>
+    </div>
+
+    <div class="social-card" onclick="portal('TELEGRAM')">
+      <div class="social-icon">➤</div>
+      <div>
+        <h3>TELEGRAM</h3>
+        <p>SECURE COMMUNICATION CHANNEL</p>
+      </div>
+      <span class="open">OPEN //</span>
+    </div>
+
+    <div class="social-card" onclick="portal('IMO')">
+      <div class="social-icon">◉</div>
+      <div>
+        <h3>IMO</h3>
+        <p>PRIVATE COMMUNICATION CHANNEL</p>
+      </div>
+      <span class="open">OPEN //</span>
+    </div>
+
+    <div class="social-card" onclick="portal('TIKTOK')">
+      <div class="social-icon">♪</div>
+      <div>
+        <h3>TIKTOK</h3>
+        <p>MEDIA SIGNAL CHANNEL</p>
+      </div>
+      <span class="open">OPEN //</span>
+    </div>
+
+    <div class="social-card" onclick="portal('PUBG')">
+      <div class="social-icon">⌁</div>
+      <div>
+        <h3>PUBG</h3>
+        <p>TACTICAL GAMING CHANNEL</p>
+      </div>
+      <span class="open">OPEN //</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SYSTEM STATUS -->
+<section class="section status-section" id="status">
+  <div class="section-head">
+    <span>07 // SYSTEM STATUS</span>
+    <b>LIVE MONITOR</b>
+  </div>
+
+  <div class="status-box">
+
+    <div class="status-row">
+      <span>MATRIX NETWORK</span>
+      <strong>ONLINE</strong>
+    </div>
+
+    <div class="status-row">
+      <span>RADAR SYSTEM</span>
+      <strong>ACTIVE</strong>
+    </div>
+
+    <div class="status-row">
+      <span>IDENTITY CORE</span>
+      <strong>CLASSIFIED</strong>
+    </div>
+
+    <div class="status-row">
+      <span>BLACK SHADOW</span>
+      <strong>CONNECTED</strong>
+    </div>
+
+    <div class="status-row">
+      <span>TRACE DETECTION</span>
+      <strong>ZERO</strong>
+    </div>
+
+    <div class="status-row">
+      <span>SECURITY LEVEL</span>
+      <strong>MAXIMUM</strong>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-code">
+    BINAM NISHON // BLACK SHADOW
+  </div>
+
+  <div class="footer-motto">
+    SILENT. PRECISE. CREATIVE.
+  </div>
+
+  <div class="footer-line"></div>
+
+  <div class="footer-bottom">
+    <span>IDENTITY CLASSIFIED</span>
+    <span>© BLACK SHADOW</span>
+    <span>NO TRACE // NO FEAR</span>
+  </div>
+</footer>
+
+
+<!-- PORTAL MODAL -->
+<div id="portal" class="portal">
+
+  <div class="portal-box">
+
+    <div class="portal-top">
+      <span>SECURE CHANNEL</span>
+      <span>● ONLINE</span>
+    </div>
+
+    <div class="portal-content">
+
+      <div class="portal-symbol">⌬</div>
+
+      <h2 id="portalTitle">CHANNEL</h2>
+
+      <div class="portal-line"></div>
+
+      <p id="portalText">
+        MATRIX CHANNEL // SECURE INTERFACE READY
+      </p>
+
+      <div class="portal-warning">
+        ACCESS LEVEL: CLASSIFIED
+      </div>
+
+      <button onclick="closePortal()" class="close-btn">
+        CLOSE CHANNEL
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
+
 
 <script>
 
-const canvas=document.getElementById("matrix");
-const ctx=canvas.getContext("2d");
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-let width,height,columns,drops;
+let width;
+let height;
+let columns;
+let drops;
 
-const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ";
+const chars =
+"01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ<>[]{}#$%";
 
 function resize(){
 
-width=canvas.width=window.innerWidth;
-height=canvas.height=window.innerHeight;
+  width = canvas.width = innerWidth;
+  height = canvas.height = innerHeight;
 
-columns=Math.floor(width/18);
-drops=Array(columns).fill(0);
+  columns = Math.floor(width / 17);
+
+  drops = Array(columns)
+    .fill(0)
+    .map(() => Math.random() * -40);
 
 }
 
 resize();
 
-window.addEventListener("resize",resize);
+addEventListener("resize", resize);
+
 
 function matrix(){
 
-ctx.fillStyle="rgba(0,3,1,.08)";
-ctx.fillRect(0,0,width,height);
+  ctx.fillStyle = "rgba(0,3,1,.055)";
+  ctx.fillRect(0,0,width,height);
 
-ctx.font="15px monospace";
-ctx.fillStyle="#27ff6b";
+  ctx.font = "14px monospace";
 
-for(let i=0;i<columns;i++){
+  for(let i = 0; i < columns; i++){
 
-let char=chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillStyle =
+      Math.random() > .94
+      ? "#a7ffc3"
+      : "#25ff6b";
 
-ctx.fillText(char,i*18,drops[i]*18);
+    const c =
+      chars[Math.floor(Math.random() * chars.length)];
 
-if(drops[i]*18>height && Math.random()>.975){
-drops[i]=0;
-}
+    ctx.fillText(
+      c,
+      i * 17,
+      drops[i] * 17
+    );
 
-drops[i]++;
+    if(
+      drops[i] * 17 > height &&
+      Math.random() > .965
+    ){
 
-}
+      drops[i] = 0;
 
-requestAnimationFrame(matrix);
+    }
+
+    drops[i]++;
+
+  }
+
+  requestAnimationFrame(matrix);
 
 }
 
 matrix();
 
-function scan(){
 
-const output=document.getElementById("terminal");
+function enterSystem(){
 
-const lines=[
-"SCAN STARTED...",
-"RADAR SWEEP ........ 100%",
-"SIGNAL INTEGRITY ... STABLE",
-"IDENTITY CORE ...... LOCKED",
-"BLACK SHADOW ...... PRESENT",
-"THREAT LEVEL ....... NOMINAL",
-"SCAN COMPLETE."
-];
+  const w = document.getElementById("welcome");
 
-output.innerHTML="";
+  w.style.transition = "opacity .7s";
+  w.style.opacity = "0";
 
-lines.forEach((line,index)=>{
+  setTimeout(() => {
 
-setTimeout(()=>{
+    w.remove();
 
-output.innerHTML+=line+"<br>";
-
-},index*300);
-
-});
+  },700);
 
 }
+
+
+function scan(){
+
+  const o = document.getElementById("terminal");
+
+  const lines = [
+
+    "SCAN STARTED...",
+    "MATRIX CHANNEL .... CONNECTED",
+    "RADAR SWEEP ........ 100%",
+    "SIGNAL INTEGRITY ... STABLE",
+    "IDENTITY CORE ...... LOCKED",
+    "BLACK SHADOW ...... PRESENT",
+    "THREAT LEVEL ....... NOMINAL",
+    "SCAN COMPLETE."
+
+  ];
+
+  o.innerHTML = "";
+
+  lines.forEach((x,i) => {
+
+    setTimeout(() => {
+
+      o.innerHTML += x + "<br>";
+
+    }, i * 260);
+
+  });
+
+}
+
 
 function portal(name){
 
-document.getElementById("portal").style.display="flex";
+  document.getElementById("portal").style.display = "flex";
 
-document.getElementById("portalTitle").textContent=name;
+  document.getElementById("portalTitle")
+    .textContent = name;
 
-document.getElementById("portalText").textContent=
-"MATRIX CHANNEL // "+name+" — SECURE INTERFACE READY";
+  document.getElementById("portalText")
+    .textContent =
+    "MATRIX CHANNEL // " +
+    name +
+    " — SECURE INTERFACE READY";
 
 }
+
 
 function closePortal(){
 
-document.getElementById("portal").style.display="none";
+  document.getElementById("portal").style.display = "none";
 
 }
+
 
 </script>
 
