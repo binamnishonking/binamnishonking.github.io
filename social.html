@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+
+  <title>BLACK SHADOW — ENCRYPTED CHANNEL</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #000;
+      color: #baffc9;
+      font-family: monospace;
+      overflow: hidden;
+    }
+
+    #matrix {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .3;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        rgba(0,255,80,.035) 4px
+      );
+    }
+
+    .system {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .panel {
+      width: min(900px, 100%);
+      min-height: 650px;
+      border: 1px solid #00ff55;
+      background: rgba(0,8,3,.88);
+      box-shadow:
+        0 0 40px rgba(0,255,80,.15),
+        inset 0 0 60px rgba(0,255,80,.035);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "CLASSIFIED";
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: rgba(0,255,80,.15);
+      font-size: 40px;
+      font-weight: bold;
+      transform: rotate(-15deg);
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,255,80,.2);
+      padding-bottom: 15px;
+      direction: ltr;
+    }
+
+    .logo {
+      color: #00ff55;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-shadow: 0 0 15px #00ff55;
+    }
+
+    .online {
+      color: #00ff55;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-top: 70px;
+    }
+
+    .radar {
+      width: 230px;
+      height: 230px;
+      margin: 0 auto 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,255,80,.6);
+      position: relative;
+      box-shadow:
+        0 0 35px rgba(0,255,80,.15),
+        inset 0 0 30px rgba(0,255,80,.05);
+    }
+
+    .radar::before,
+    .radar::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0,255,80,.25);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .radar::before {
+      width: 65%;
+      height: 65%;
+    }
+
+    .radar::after {
+      width: 32%;
+      height: 32%;
+    }
+
+    .sweep {
+      position: absolute;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(to right, #00ff55, transparent);
+      top: 50%;
+      left: 50%;
+      transform-origin: left;
+      animation: rotate 3s linear infinite;
+      box-shadow: 0 0 15px #00ff55;
+    }
+
+    .center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: #00ff55;
+      font-size: 25px;
+      text-shadow: 0 0 20px #00ff55;
+    }
+
+    h1 {
+      color: #00ff55;
+      font-size: clamp(35px, 7vw, 70px);
+      letter-spacing: 8px;
+      text-shadow: 0 0 25px rgba(0,255,80,.5);
+    }
+
+    .channel {
+      margin-top: 15px;
+      color: #587c62;
+      letter-spacing: 4px;
+      font-size: 11px;
+    }
+
+    .terminal {
+      margin: 40px auto;
+      max-width: 650px;
+      border: 1px solid rgba(0,255,80,.2);
+      text-align: left;
+      padding: 20px;
+      background: rgba(0,0,0,.6);
+      line-height: 2;
+      font-size: 12px;
+      direction: ltr;
+    }
+
+    .terminal p {
+      color: #688b71;
+    }
+
+    .terminal span {
+      color: #00ff55;
+    }
+
+    .back {
+      display: inline-block;
+      padding: 13px 25px;
+      border: 1px solid #00ff55;
+      color: #00ff55;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: .3s;
+    }
+
+    .back:hover {
+      color: #000;
+      background: #00ff55;
+      box-shadow: 0 0 25px rgba(0,255,80,.6);
+    }
+
+    .clock {
+      position: fixed;
+      bottom: 15px;
+      left: 15px;
+      color: #00ff55;
+      font-size: 11px;
+      z-index: 20;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media(max-width:600px) {
+
+      .panel {
+        min-height: 90vh;
+        padding: 20px;
+      }
+
+      .content {
+        padding-top: 45px;
+      }
+
+      .radar {
+        width: 180px;
+        height: 180px;
+        margin-bottom: 35px;
+      }
+
+      h1 {
+        letter-spacing: 4px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+<div class="scanlines"></div>
+
+<div class="system">
+
+  <div class="panel">
+
+    <div class="top">
+
+      <div class="logo">
+        BINAM NISHON
+      </div>
+
+      <div class="online">
+        ● SYSTEM ONLINE
+      </div>
+
+    </div>
+
+    <div class="content">
+
+      <div class="radar">
+        <div class="sweep"></div>
+        <div class="center">BS</div>
+      </div>
+
+      <h1 id="network">
+        SOCIAL NETWORK
+      </h1>
+
+      <div class="channel">
+        ENCRYPTED CHANNEL
+      </div>
+
+      <div class="terminal">
+
+        <p>&gt; CONNECTING TO CHANNEL...</p>
+        <p>&gt; SIGNAL: <span>DETECTED</span></p>
+        <p>&gt; SECURITY: <span>ENCRYPTED</span></p>
+        <p>&gt; NETWORK: <span>BLACK SHADOW</span></p>
+        <p>&gt; LEADER: <span>BINAM NISHON</span></p>
+        <p>&gt; STATUS: <span>WAITING FOR OFFICIAL CONNECTION</span></p>
+        <p>&gt; IDENTITY: <span>CLASSIFIED</span></p>
+
+      </div>
+
+      <a href="index.html" class="back">
+        ← BACK TO MAIN SYSTEM
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="clock">
+  <span id="time">00:00:00</span>
+</div>
+
+<script>
+
+  /* NETWORK NAME */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const network =
+    params.get("network") || "SOCIAL NETWORK";
+
+  document.getElementById("network")
+    .textContent = network.toUpperCase();
+
+
+  /* MATRIX */
+
+  const canvas =
+    document.getElementById("matrix");
+
+  const ctx =
+    canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+
+  resize();
+
+  const chars =
+    "01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオ";
+
+  const size = 15;
+
+  let columns =
+    Math.floor(canvas.width / size);
+
+  let drops =
+    Array(columns).fill(1);
+
+  function draw() {
+
+    ctx.fillStyle =
+      "rgba(0,0,0,.055)";
+
+    ctx.fillRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    ctx.fillStyle = "#00ff55";
+    ctx.font = size + "px monospace";
+
+    for (
+      let i = 0;
+      i < drops.length;
+      i++
+    ) {
+
+      const char =
+        chars[
+          Math.floor(
+            Math.random() * chars.length
+          )
+        ];
+
+      ctx.fillText(
+        char,
+        i * size,
+        drops[i] * size
+      );
+
+      if (
+        drops[i] * size > canvas.height &&
+        Math.random() > .975
+      ) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 45);
+
+  window.addEventListener(
+    "resize",
+    () => {
+      resize();
+      columns =
+        Math.floor(canvas.width / size);
+      drops =
+        Array(columns).fill(1);
+    }
+  );
+
+
+  /* CLOCK */
+
+  function clock() {
+
+    const now = new Date();
+
+    document.getElementById("time")
+      .textContent =
+      now.toLocaleTimeString(
+        "en-GB",
+        { hour12: false }
+      );
+  }
+
+  setInterval(clock, 1000);
+  clock();
+
+</script>
+
+</body>
+</html>
